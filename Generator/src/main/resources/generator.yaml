@@ -1,0 +1,19 @@
+#数据库链接信息
+db:
+  url: jdbc:oracle:thin:@//192.168.24.45:1521/kaifadb
+  username: traffic_police_core_platform
+  password: traffic_police_core_platform
+author: tq
+packageName: com.example.testCode
+#生成文件路径
+path:
+  controller: controller
+  service: service.impl
+  interf: service
+  dao: dao
+  entity: entity
+  dto: dto
+  ao: ao
+  mapper: mappers
+#生成文件自定义路径
+customizePath:
