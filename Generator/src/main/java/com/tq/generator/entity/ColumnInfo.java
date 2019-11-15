@@ -2,6 +2,8 @@ package com.tq.generator.entity;
 
 import com.tq.generator.util.StringUtil;
 
+import java.util.Objects;
+
 /**
  * @author Tian Qi
  * 2019/11/12
@@ -58,6 +60,9 @@ public class ColumnInfo {
     }
 
     public String getTypeName() {
+        if (Objects.equals("VARCHAR2",typeName)) {
+            return "VARCHAR";
+        }
         return typeName;
     }
 

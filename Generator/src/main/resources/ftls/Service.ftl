@@ -13,9 +13,11 @@ import com.pcd.common.utils.WebJsonUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.demo.TqToolKit;
+import com.pcd.trafficpolice.web.test.util.TqToolKit;
+import com.pcd.common.utils.IdBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,23 +52,25 @@ public class ${ClassName}Service${Impl}{
     @Transactional(readOnly = true, propagation = Propagation.NOT_SUPPORTED)
     @Override
     public String getByPrimaryKey(String primaryKey){
-        ${ClassName}Dao ${EntityName}DO = ${EntityName}Dao.getByPrimaryKey(primaryKey);
-        ${EntityName}DTO result = new ${EntityName}DTO();
+        ${ClassName}DO ${EntityName}DO = ${EntityName}Dao.getByPrimaryKey(primaryKey);
+        ${ClassName}DTO result = new ${ClassName}DTO();
         TqToolKit.copyAttribute(${EntityName}DO, result);
         return WebJsonUtils.successReturnSingle(result);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String saveSelective(${EntityName}DO saveDO){
-        ${EntityName}Dao.saveSelective(primaryKey);
+    public String saveSelective(${ClassName}DO saveDO){
+        // 非自动生成主键
+        saveDO.setId(IdBuilder.newId());
+        ${EntityName}Dao.insertSelective(saveDO);
         return WebJsonUtils.successReturn();
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String update(${EntityName}DO updateDO){
-        ${EntityName}Dao.update(primaryKey);
+    public String update(${ClassName}DO updateDO){
+        ${EntityName}Dao.update(updateDO);
         return WebJsonUtils.successReturn();
     }
 
@@ -76,9 +80,10 @@ public class ${ClassName}Service${Impl}{
         List<String> primaryKeys = Arrays.asList(ids.split(","));
         for (String id : primaryKeys) {
             if (!TqToolKit.isBlank(id)) {
-                ${EntityName}Dao.delete(primaryKey);
+                ${EntityName}Dao.delete(id);
             }
         }
+        return WebJsonUtils.successReturn();
     }
     <#--
     ${Override}

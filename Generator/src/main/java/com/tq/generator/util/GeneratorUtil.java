@@ -3,11 +3,14 @@ package com.tq.generator.util;
 import com.tq.generator.entity.ColumnInfo;
 
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/4/19
  */
 public class GeneratorUtil {
@@ -146,7 +149,7 @@ public class GeneratorUtil {
             if (i != 0) {
                 sb.append("        ");
             }
-            sb.append(infos.get(i).getColumnName()).append(",\n");
+            sb.append(tableName).append(".").append(infos.get(i).getColumnName()).append(" AS ").append(infos.get(i).getColumnName()).append(",\n");
         }
         return sb.toString().substring(0, sb.toString().length() - 2);
     }
@@ -193,14 +196,21 @@ public class GeneratorUtil {
         for (ColumnInfo info : infos) {
             if (info.isPrimaryKey()) {
                 sb.append("<id column=\"")
-                        .append(info.getPropertyName())
+                        .append(info.getColumnName())
                         .append("\" jdbcType=\"")
                         .append(info.getTypeName())
                         .append("\" property=\"")
                         .append(info.getPropertyName())
                         .append("\"/> \n");
             } else {
-                sb.append("        ").append("<result column=\"").append(info.getPropertyName()).append("\" property=\"").append(info.getPropertyName()).append("\"/> \n");
+                sb.append("        ")
+                        .append("<result column=\"")
+                        .append(info.getColumnName())
+                        .append("\" jdbcType=\"")
+                        .append(info.getTypeName())
+                        .append("\" property=\"")
+                        .append(info.getPropertyName())
+                        .append("\"/> \n");
             }
         }
         return sb.toString();
@@ -292,19 +302,36 @@ public class GeneratorUtil {
 
     /**
      * 生成Mapper 插入列名字段（所有关系皆用）
-     *
+     * 插入列集合
      * @param infos
      * @return
      */
-    public static String generateMapperInsertProperties(List<ColumnInfo> infos) {
-        StringBuilder sb = new StringBuilder();
+//    public static String generateMapperInsertProperties(List<ColumnInfo> infos) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < infos.size(); i++) {
+//            if (i != 0) {
+//                sb.append("            ");
+//            }
+//            sb.append("\t<if test=\"")
+//                    .append(infos.get(i).getPropertyName() + " != null and " + infos.get(i).getPropertyName() + " != ''" )
+//                    .append("\">")
+//                    .append(" "+infos.get(i).getColumnName() + ", ")
+//                    .append("</if>\n");
+//        }
+//        return sb.toString().substring(0, sb.toString().length() - 1);
+//    }
+    public static List<Map<String,String>> generateMapperInsertProperties(List<ColumnInfo> infos) {
+        List<Map<String,String>> insertProperties = new ArrayList<Map<String,String>>();
+        Map<String,String> insertPropertie;
         for (int i = 0; i < infos.size(); i++) {
-            if (i != 0) {
-                sb.append("            ");
-            }
-            sb.append(infos.get(i).getColumnName() + ",\n");
+            insertPropertie = new HashMap<String,String>();
+            ColumnInfo info = infos.get(i);
+            insertPropertie.put("ColumnName",info.getColumnName());
+            insertPropertie.put("PropertyName",info.getPropertyName());
+            insertPropertie.put("TypeName",info.getTypeName());
+            insertProperties.add(insertPropertie);
         }
-        return sb.toString().substring(0, sb.toString().length() - 2);
+        return insertProperties;
     }
 
     /**
@@ -316,7 +343,11 @@ public class GeneratorUtil {
             if (i != 0) {
                 sb.append("            ");
             }
-            sb.append("#{").append(infos.get(i).getPropertyName()).append("},\n");
+            sb.append("\t#{")
+                    .append(infos.get(i).getPropertyName())
+                    .append(",jdbcType=")
+                    .append(infos.get(i).getTypeName())
+                    .append("},\n");
         }
         return sb.toString().substring(0, sb.toString().length() - 2);
     }
@@ -380,15 +411,31 @@ public class GeneratorUtil {
     /**
      * 生成Mapper 更新属性字段
      */
-    public static String generateMapperUpdateProperties(List<ColumnInfo> infos) {
-        StringBuilder sb = new StringBuilder();
+//    public static String generateMapperUpdateProperties(List<ColumnInfo> infos) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < infos.size(); i++) {
+//            if (i != 0) {
+//                sb.append("        ");
+//            }
+//            sb.append(infos.get(i).getColumnName()).append(" = #{").append(infos.get(i).getPropertyName()).append("},\n");
+//        }
+//        return sb.toString().substring(0, sb.toString().length() - 2);
+//    }
+    public static List<Map<String,String>> generateMapperUpdateProperties(List<ColumnInfo> infos) {
+        List<Map<String,String>> updateProperties = new ArrayList<Map<String,String>>();
+        Map<String,String> updatePropertie;
         for (int i = 0; i < infos.size(); i++) {
-            if (i != 0) {
-                sb.append("        ");
+            updatePropertie = new HashMap<String,String>();
+            ColumnInfo info = infos.get(i);
+            if (info.isPrimaryKey()) {//主键不参与更新
+                continue;
             }
-            sb.append(infos.get(i).getColumnName()).append(" = #{").append(infos.get(i).getPropertyName()).append("},\n");
+            updatePropertie.put("ColumnName",info.getColumnName());
+            updatePropertie.put("PropertyName",info.getPropertyName());
+            updatePropertie.put("TypeName",info.getTypeName());
+            updateProperties.add(updatePropertie);
         }
-        return sb.toString().substring(0, sb.toString().length() - 2);
+        return updateProperties;
     }
 
     /**

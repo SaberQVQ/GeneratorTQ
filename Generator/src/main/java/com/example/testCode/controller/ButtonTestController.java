@@ -1,8 +1,8 @@
 package com.example.testCode.controller;
 
-import com.example.testCode.entity.ButtonDO;
-import com.example.testCode.service.ButtonService;
-import com.example.testCode.ao.ButtonSearchAO;
+import com.example.testCode.entity.ButtonTestDO;
+import com.example.testCode.service.ButtonTestService;
+import com.example.testCode.ao.ButtonTestSearchAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,19 +21,19 @@ import java.util.List;
  * Date  2019-11-14
  */
 @RestController
-@RequestMapping(value = "/button")
-public class ButtonController {
+@RequestMapping(value = "/buttonTest")
+public class ButtonTestController {
 
     @Autowired
-    private ButtonService buttonService;
+    private ButtonTestService buttonTestService;
 
     /**
      * 根据条件查询数据列表 带分页
      */
     @RequestMapping(value="/listByQuery", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String list(@RequestParam(value = "content") String content, int rows, int page) {
-        ButtonSearchAO searchAO = WebConversionUtils.getConditionJavaObject(content, ButtonSearchAO.class);
-        return buttonService.listByQuery(searchAO, rows, page);
+        ButtonTestSearchAO searchAO = WebConversionUtils.getConditionJavaObject(content, ButtonTestSearchAO.class);
+        return buttonTestService.listByQuery(searchAO, rows, page);
     }
 
     /**
@@ -43,7 +43,7 @@ public class ButtonController {
     public String getByPrimaryKey(@RequestParam("content") String content) {
         JSONObject conditionJson = WebConversionUtils.getConditionJson(content);
         String primaryKey = conditionJson.getString("id");
-        return buttonService.getByPrimaryKey(primaryKey);
+        return buttonTestService.getByPrimaryKey(primaryKey);
     }
 
     /**
@@ -51,8 +51,8 @@ public class ButtonController {
      */
     @RequestMapping(value = "/saveSelective", method = RequestMethod.POST)
     public String saveSelective(@RequestParam("content") String content) {
-        ButtonDO saveAO = WebConversionUtils.getValueJavaObject(content, ButtonDO.class);
-        return buttonService.saveSelective(saveAO);
+        ButtonTestDO saveAO = WebConversionUtils.getValueJavaObject(content, ButtonTestDO.class);
+        return buttonTestService.saveSelective(saveAO);
     }
 
     /**
@@ -60,8 +60,8 @@ public class ButtonController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@RequestParam("content") String content) {
-        ButtonDO updateAO = WebConversionUtils.getValueJavaObject(content, ButtonDO.class);
-        return buttonService.update(updateAO);
+        ButtonTestDO updateAO = WebConversionUtils.getValueJavaObject(content, ButtonTestDO.class);
+        return buttonTestService.update(updateAO);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ButtonController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String delete(@RequestParam("content") String content) {
         String ids = WebConversionUtils.getConditionJson(content).getString("ids");
-        return buttonService.delete(ids);
+        return buttonTestService.delete(ids);
     }
 
 

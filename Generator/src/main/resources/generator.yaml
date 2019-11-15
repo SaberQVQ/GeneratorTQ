@@ -4,16 +4,17 @@ db:
   username: traffic_police_core_platform
   password: traffic_police_core_platform
 author: tq
-packageName: com.example.testCode
+packageName: com.pcd.trafficpolice.web
 #生成文件路径
 path:
   controller: controller
   service: service.impl
   interf: service
-  dao: dao
-  entity: entity
-  dto: dto
-  ao: ao
-  mapper: mappers
+  dao: mappers.primary
+  entity: model.primary
+  dto: model.dto
+  ao: model.ao
+  mapper: mybatis.mappers.primary
 #生成文件自定义路径
-customizePath:
+customizePath: E:\tq_new\trafficpolice-hxpt-web\src\main\java
+customizeMapperPath: #E:\testtttt #E:\tq_new\trafficpolice-hxpt-web\src\main\

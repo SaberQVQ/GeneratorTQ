@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * Author tq
  * Date  2019-11-14
  */
-public class ButtonDO {
+public class ButtonTestDO {
 
     private String id;
 
@@ -27,7 +27,7 @@ public class ButtonDO {
 
 
 
-    public ButtonDO(){
+    public ButtonTestDO(){
     }
 
     public void setId (String id) {this.id = id;} 

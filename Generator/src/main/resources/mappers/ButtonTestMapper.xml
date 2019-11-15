@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.testCode.dao.ButtonDao">
+<mapper namespace="com.example.testCode.dao.ButtonTestDao">
 
-    <resultMap id="BaseResultMap" type="com.example.testCode.entity.ButtonDO">
+    <resultMap id="BaseResultMap" type="com.example.testCode.entity.ButtonTestDO">
         <id column="ID" jdbcType="VARCHAR" property="id"/> 
         <result column="KEY" jdbcType="VARCHAR" property="key"/> 
         <result column="VALUE" jdbcType="VARCHAR" property="value"/> 
@@ -23,14 +23,14 @@
         TP_BUTTON.UPDATE_TIME AS UPDATE_TIME
     </sql>
 
-    <sql id="buttonJoins">
+    <sql id="buttonTestJoins">
         
     </sql>
 
     <select id="listByQuery" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumns" />
-        FROM TP_BUTTON <include refid="buttonJoins" />
+        FROM TP_BUTTON <include refid="buttonTestJoins" />
         <where>
 
         </where>
@@ -39,20 +39,20 @@
     <select id="getByPrimaryKey" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumns" />
-        FROM TP_BUTTON <include refid="buttonJoins" />
+        FROM TP_BUTTON <include refid="buttonTestJoins" />
         <where>
             TP_BUTTON.ID = #{id, jdbcType=VARCHAR}
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.example.testCode.entity.ButtonDO">
+    <insert id="insert" parameterType="com.example.testCode.entity.ButtonTestDO">
         INSERT INTO TP_BUTTON
         (ID, KEY, VALUE, IS_DELETED, CREATE_TIME, UPDATE_TIME)
         values
         (#{id,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.example.testCode.entity.ButtonDO" >
+    <insert id="insertSelective" parameterType="com.example.testCode.entity.ButtonTestDO" >
         INSERT INTO TP_BUTTON
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -96,7 +96,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.example.testCode.entity.ButtonDO" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.testCode.entity.ButtonTestDO" >
         UPDATE TP_BUTTON
         <set>
             <if test="key != null" >
@@ -118,7 +118,7 @@
         where TP_BUTTON.ID = #{id, jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.example.testCode.entity.ButtonDO" >
+    <update id="updateByPrimaryKey" parameterType="com.example.testCode.entity.ButtonTestDO" >
         UPDATE TP_BUTTON
         SET
             <if test="key != null" >

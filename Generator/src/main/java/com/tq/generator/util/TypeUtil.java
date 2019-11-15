@@ -3,7 +3,7 @@ package com.tq.generator.util;
 import java.sql.Types;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/4/19
  */
 public class TypeUtil {

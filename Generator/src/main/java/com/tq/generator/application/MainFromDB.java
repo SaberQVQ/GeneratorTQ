@@ -18,7 +18,7 @@ public class MainFromDB {
     public static void single() {
         Invoker invoker = new SingleInvoker.Builder()
                 .setTableName("TP_BUTTON")
-                .setClassName("Button")
+                .setClassName("ButtonTest")
                 .build();
         invoker.execute();
     }

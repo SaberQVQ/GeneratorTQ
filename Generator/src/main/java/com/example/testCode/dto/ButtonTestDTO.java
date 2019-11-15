@@ -1,4 +1,4 @@
-package com.example.testCode.ao;
+package com.example.testCode.dto;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,5 +11,6 @@ import java.sql.Timestamp;
 * Author tq
 * Date  2019-11-14
 */
-public class ButtonSearchAO {
+public class ButtonTestDTO{
+
 }

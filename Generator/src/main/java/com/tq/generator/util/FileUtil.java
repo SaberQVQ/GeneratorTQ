@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Objects;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/4/19
  */
 public class FileUtil {
@@ -100,8 +100,17 @@ public class FileUtil {
      */
     public static String getResourcePath() {
         StringBuilder sb = new StringBuilder();
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getCustomizePath())) {//自定义代码生成位置
-            sb.append(ConfigUtil.getConfiguration().getCustomizePath());
+        String resource;
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getCustomizeMapperPath())) {
+            resource = ConfigUtil.getConfiguration().getCustomizeMapperPath();
+        } else {
+            resource = ConfigUtil.getConfiguration().getCustomizePath();
+            //截取到main后面
+            resource = resource.substring(0, resource.indexOf("java"));
+        }
+
+        if (!StringUtil.isBlank(resource)) {//自定义代码生成位置
+            sb.append(resource);
             if (!Objects.equals('\\', sb.charAt(sb.length() - 1))) {
                 sb.append("\\");
             }

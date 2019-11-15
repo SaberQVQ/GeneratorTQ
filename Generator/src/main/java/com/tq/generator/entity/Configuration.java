@@ -3,15 +3,24 @@ package com.tq.generator.entity;
 import java.io.Serializable;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/9/7
  */
 public class Configuration implements Serializable {
     private String author;
     private String packageName;
     private String customizePath;
+    private String customizeMapperPath;
     private Path path;
     private Db db;
+
+    public String getCustomizeMapperPath() {
+        return customizeMapperPath;
+    }
+
+    public void setCustomizeMapperPath(String customizeMapperPath) {
+        this.customizeMapperPath = customizeMapperPath;
+    }
 
     public String getAuthor() {
         return author;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.alibaba.fastjson.JSONObject;
 
 import org.springframework.http.MediaType;
 import com.pcd.common.utils.WebConversionUtils;
@@ -38,7 +39,7 @@ public class ${ClassName}Controller {
     /**
      * 根据主键查询数据信息
      */
-    @RequestMapping(value = "/getByPrimaryKey", method = RequestMethod.GET)
+    @RequestMapping(value = "/getByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String getByPrimaryKey(@RequestParam("content") String content) {
         JSONObject conditionJson = WebConversionUtils.getConditionJson(content);
         String primaryKey = conditionJson.getString("id");
@@ -48,25 +49,25 @@ public class ${ClassName}Controller {
     /**
      * 新增数据
      */
-    @RequestMapping(value = "/saveSelective", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveSelective", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String saveSelective(@RequestParam("content") String content) {
-        ${EntityName}DO saveAO = WebConversionUtils.getValueJavaObject(content, ${EntityName}DO.class);
+        ${ClassName}DO saveAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);
         return ${EntityName}Service.saveSelective(saveAO);
     }
 
     /**
      * 更新数据
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String update(@RequestParam("content") String content) {
-        ${EntityName}DO updateAO = WebConversionUtils.getValueJavaObject(content, ${EntityName}DO.class);
+        ${ClassName}DO updateAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);
         return ${EntityName}Service.update(updateAO);
     }
 
     /**
      * 删除数据
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String delete(@RequestParam("content") String content) {
         String ids = WebConversionUtils.getConditionJson(content).getString("ids");
         return ${EntityName}Service.delete(ids);

@@ -1,7 +1,7 @@
 package com.tq.generator.invoker.base;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/9/5
  */
 public abstract class AbstractBuilder {

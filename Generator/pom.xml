@@ -24,6 +24,8 @@
         <!-- Mybatis -->
         <mybatis-spring.version>1.3.1</mybatis-spring.version>
         <mybatis.pagehelper.version>1.2.3</mybatis.pagehelper.version>
+
+        <fastjson.version>1.2.56</fastjson.version>
     </properties>
 
     <dependencies>
@@ -100,6 +102,13 @@
             <groupId>com.pcd</groupId>
             <artifactId>common-component</artifactId>
             <version>${pcd-common-component.version}</version>
+        </dependency>
+
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
 
     </dependencies>

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018-11-27
  */
 public class TaskQueue {

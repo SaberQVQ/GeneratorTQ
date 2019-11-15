@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/4/20
  */
 public abstract class AbstractTask implements Serializable {

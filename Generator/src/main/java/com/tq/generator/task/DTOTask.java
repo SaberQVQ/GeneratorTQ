@@ -34,12 +34,13 @@ public class DTOTask extends AbstractTask {
     public void run() throws IOException, TemplateException {
         // 生成Entity填充数据
         System.out.println("Generating " + className + ".java");
-        Map<String, String> entityData = new HashMap<>();
-        entityData.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
-        entityData.put("DTOPackageName", ConfigUtil.getConfiguration().getPath().getDto());
-        entityData.put("Author", ConfigUtil.getConfiguration().getAuthor());
-        entityData.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        entityData.put("ClassName", className);
+        Map<String, String> dtoData = new HashMap<>();
+        dtoData.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
+        dtoData.put("DTOPackageName", ConfigUtil.getConfiguration().getPath().getDto());
+        dtoData.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
+        dtoData.put("Author", ConfigUtil.getConfiguration().getAuthor());
+        dtoData.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        dtoData.put("ClassName", className);
 //        if (!StringUtil.isBlank(parentForeignKey)) { // 多对多：主表实体
 //            entityData.put("Properties", GeneratorUtil.generateEntityProperties(parentClassName, tableInfos));
 //            entityData.put("Methods", GeneratorUtil.generateEntityMethods(parentClassName, tableInfos));
@@ -56,6 +57,6 @@ public class DTOTask extends AbstractTask {
 
         String fileName = className + "DTO.java";
         // 生成Entity文件
-        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_DTO, entityData, filePath + fileName);
+        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_DTO, dtoData, filePath + fileName);
     }
 }

@@ -11,5 +11,5 @@ import java.sql.Timestamp;
 * Author tq
 * Date  2019-11-14
 */
-public class ButtonSearchAO {
+public class ButtonTestSearchAO {
 }

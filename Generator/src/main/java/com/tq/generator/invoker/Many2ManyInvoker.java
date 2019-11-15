@@ -9,7 +9,7 @@ import com.tq.generator.util.StringUtil;
 import java.sql.SQLException;
 
 /**
- * Author GreedyStar
+ * Author tq
  * Date   2018/9/5
  */
 public class Many2ManyInvoker extends AbstractInvoker {

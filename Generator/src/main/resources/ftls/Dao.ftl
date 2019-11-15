@@ -13,20 +13,12 @@ public interface ${ClassName}Dao {
 
     public List${Bracket}${ClassName}DO> listByQuery(${ClassName}SearchAO ${EntityName}SearchAO);
 
+    public ${ClassName}DO getByPrimaryKey(String primaryKey);
 
+    public int insertSelective(${ClassName}DO saveDO);
 
-    <#--public ${ClassName} get(String id);
+    public int update(${ClassName}DO saveDO);
 
-    public List<${ClassName}> findList(${ClassName} ${EntityName});
-
-    public List<${ClassName}> findAllList();
-
-    public int insert(${ClassName} ${EntityName});
-
-    public int insertBatch(List<${ClassName}> ${EntityName}s);
-
-    public int update(${ClassName} ${EntityName});
-
-    public int delete(${ClassName} ${EntityName});-->
+    public int delete(String primaryKey);
 
 }
