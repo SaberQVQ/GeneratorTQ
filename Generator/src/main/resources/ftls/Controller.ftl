@@ -58,16 +58,17 @@ public class ${ClassName}Controller {
     /**
      * 更新数据
      */
-    @RequestMapping(value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/updateByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String update(@RequestParam("content") String content) {
         ${ClassName}DO updateAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);
+        updateAO.setId(WebConversionUtils.getConditionJson(content).getString("id"));
         return ${EntityName}Service.update(updateAO);
     }
 
     /**
      * 删除数据
      */
-    @RequestMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/deleteByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String delete(@RequestParam("content") String content) {
         String ids = WebConversionUtils.getConditionJson(content).getString("ids");
         return ${EntityName}Service.delete(ids);

@@ -16,6 +16,8 @@ public class FreemarketConfigUtils {
     public final static int TYPE_INTERFACE = 5;
     public final static int TYPE_AO = 6;
     public final static int TYPE_DTO = 7;
+    public final static int TYPE_HTML_LIST = 8;
+    public final static int TYPE_HTML_FORM = 9;
     private static Configuration configuration;
 
     public static synchronized Configuration getInstance() {

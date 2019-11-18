@@ -56,6 +56,7 @@ public class ConnectionUtil {
             } else {
                 info = new ColumnInfo(metaData.getColumnName(i), metaData.getColumnType(i), metaData.getColumnTypeName(i), false);
             }
+            System.out.println(metaData.getSchemaName(i));
             columnInfos.add(info);
         }
         statement.close();

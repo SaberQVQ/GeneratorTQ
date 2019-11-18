@@ -474,4 +474,43 @@ public class GeneratorUtil {
         return sb.toString();
     }
 
+    /**
+     * 生成
+     */
+    public static String generateHtmlColumns(List<ColumnInfo> infos) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[[\n");
+        for (int i = 0; i < infos.size(); i++) {
+            ColumnInfo info = infos.get(i);
+            sb.append("\t\t\t\t");
+            if (info.isPrimaryKey()) {
+                sb.append("{field:'" + info.getPropertyName() + "', title:'" + info.getPropertyName() + "', width:40, fixed:true, align:'center', checkbox:true},\n");
+            } else {
+                sb.append("{field:'" + info.getPropertyName() + "', title:'" + info.getPropertyName() + "', width:80, resizable:true, align:'center', sortable: 'true'},\n");
+            }
+        }
+        return sb.substring(0, sb.length() - 2) + "\n\t\t\t]]";
+    }
+
+    public static String generateHtmlEvents(String className) {
+        StringBuilder sb = new StringBuilder();
+        className = className.toUpperCase();
+        sb.append("{'list':'" + className + "_LIST'")
+                .append(",'add':'" + className + "_ADD'")
+                .append(",'edit':'"  + className + "_EDIT'")
+                .append(",'delete':'"  + className + "_DELETE'")
+                .append("}");
+        return sb.toString();
+    }
+
+    public static String generateHtmlFormPage(String className) {
+        StringBuilder sb = new StringBuilder();
+        String resourcePath = StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getHtml());
+        if (resourcePath.indexOf("PAGE") != -1) {
+            resourcePath = resourcePath.substring(resourcePath.indexOf("PAGE"), resourcePath.length() - 1);
+        }
+        sb.append("\\").append(resourcePath).append("\\").append("TP_" + className + "_form.html");
+        return sb.toString().replace("\\", "/");
+    }
+
 }

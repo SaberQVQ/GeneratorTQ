@@ -44,6 +44,9 @@ public class TaskQueue {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
             taskQueue.add(new MapperTask(className, tableName, tableInfos));
         }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getHtml())) {
+            taskQueue.add(new HtmlTask(className, tableInfos));
+        }
     }
 
     public void initOne2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {

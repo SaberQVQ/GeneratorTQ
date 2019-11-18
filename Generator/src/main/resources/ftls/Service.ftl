@@ -70,7 +70,7 @@ public class ${ClassName}Service${Impl}{
     @Transactional(rollbackFor = Exception.class)
     @Override
     public String update(${ClassName}DO updateDO){
-        ${EntityName}Dao.update(updateDO);
+        ${EntityName}Dao.updateByPrimaryKeySelective(updateDO);
         return WebJsonUtils.successReturn();
     }
 

@@ -17,7 +17,7 @@ public interface ${ClassName}Dao {
 
     public int insertSelective(${ClassName}DO saveDO);
 
-    public int update(${ClassName}DO saveDO);
+    public int updateByPrimaryKeySelective(${ClassName}DO saveDO);
 
     public int delete(String primaryKey);
 

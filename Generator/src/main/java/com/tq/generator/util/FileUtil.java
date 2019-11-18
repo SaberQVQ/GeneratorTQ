@@ -63,6 +63,10 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("SearchAO.ftl");
             case FreemarketConfigUtils.TYPE_DTO:
                 return FreemarketConfigUtils.getInstance().getTemplate("DTO.ftl");
+            case FreemarketConfigUtils.TYPE_HTML_LIST:
+                return FreemarketConfigUtils.getInstance().getTemplate("HtmlList.ftl");
+            case FreemarketConfigUtils.TYPE_HTML_FORM:
+                return FreemarketConfigUtils.getInstance().getTemplate("HtmlForm.ftl");
             default:
                 return null;
         }
@@ -76,7 +80,7 @@ public class FileUtil {
     }
 
     /**
-     * 获取源码路径 制定位置
+     * 获取源码路径 指定位置
      *
      * @return
      */
@@ -97,19 +101,22 @@ public class FileUtil {
      * 获取资源文件路径
      *
      * @return
+     * todo 存在bug 需要优化
      */
     public static String getResourcePath() {
         StringBuilder sb = new StringBuilder();
         String resource;
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getCustomizeMapperPath())) {
-            resource = ConfigUtil.getConfiguration().getCustomizeMapperPath();
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getCustomizeResourcesPath())) {
+            resource = ConfigUtil.getConfiguration().getCustomizeResourcesPath();
         } else {
             resource = ConfigUtil.getConfiguration().getCustomizePath();
-            //截取到main后面
-            resource = resource.substring(0, resource.indexOf("java"));
         }
 
         if (!StringUtil.isBlank(resource)) {//自定义代码生成位置
+            //截取到main后面
+            if (resource.indexOf("java") > -1) {
+                resource = resource.substring(0, resource.indexOf("java"));
+            }
             sb.append(resource);
             if (!Objects.equals('\\', sb.charAt(sb.length() - 1))) {
                 sb.append("\\");
@@ -120,5 +127,19 @@ public class FileUtil {
         sb.append("resources").append(File.separator);
         return sb.toString();
     }
+
+//    //获取html文件位置
+//    public static String getHtmlPath(){
+//        StringBuilder sb = new StringBuilder();
+//        String resource;
+//        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getCustomizeHtmlPath())) {
+//            resource = ConfigUtil.getConfiguration().getCustomizeHtmlPath();
+//        } else {
+//            sb.append(getBasicProjectPath());
+//
+//        }
+//
+//        return sb.toString();
+//    }
 
 }

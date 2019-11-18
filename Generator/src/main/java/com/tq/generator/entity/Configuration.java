@@ -10,16 +10,16 @@ public class Configuration implements Serializable {
     private String author;
     private String packageName;
     private String customizePath;
-    private String customizeMapperPath;
+    private String customizeResourcesPath;
     private Path path;
     private Db db;
 
-    public String getCustomizeMapperPath() {
-        return customizeMapperPath;
+    public String getCustomizeResourcesPath() {
+        return customizeResourcesPath;
     }
 
-    public void setCustomizeMapperPath(String customizeMapperPath) {
-        this.customizeMapperPath = customizeMapperPath;
+    public void setCustomizeResourcesPath(String customizeResourcesPath) {
+        this.customizeResourcesPath = customizeResourcesPath;
     }
 
     public String getAuthor() {
@@ -110,17 +110,27 @@ public class Configuration implements Serializable {
         private String mapper;
         private String dto;
         private String ao;
+        private String html;
 
         public Path() {
         }
 
-        public Path(String controller, String service, String interf,String dao, String entity, String mapper, String dto, String ao) {
+        public Path(String controller, String service, String interf,String dao, String entity, String mapper, String dto, String ao, String html) {
             this.controller = controller;
             this.service = service;
             this.interf = interf;
             this.dao = dao;
             this.entity = entity;
             this.mapper = mapper;
+            this.html = html;
+        }
+
+        public String getHtml() {
+            return html;
+        }
+
+        public void setHtml(String html) {
+            this.html = html;
         }
 
         public String getController() {

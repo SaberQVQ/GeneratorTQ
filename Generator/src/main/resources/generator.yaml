@@ -15,6 +15,9 @@ path:
   dto: model.dto
   ao: model.ao
   mapper: mybatis.mappers.primary
-#生成文件自定义路径
+  html: static.PAGES.TP_Pages
+#生成文件自定义路径 若不指定 按照当前项目的默认地址创建
 customizePath: E:\tq_new\trafficpolice-hxpt-web\src\main\java
-customizeMapperPath: #E:\testtttt #E:\tq_new\trafficpolice-hxpt-web\src\main\
+customizeResourcesPath: E:\tq_new\trafficpolice-hxpt-web\src\main\
+#是否是逻辑删除  未实现
+isLogicDelete: false
