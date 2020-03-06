@@ -15,11 +15,11 @@ public interface ${ClassName}Service {
 
     public String getByPrimaryKey(String primaryKey);
 
-<#--    public String saveSelective(${ClassName}DO saveDO);-->
+    public String saveSelective(${ClassName}DO saveDO);
 
-<#--    public String update(${ClassName}DO updateDO);-->
+    public String update(${ClassName}DO updateDO);
 
-<#--    public String delete(String ids);-->
+    public String delete(String ids);
 
     <#--
 

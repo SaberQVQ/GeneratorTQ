@@ -30,7 +30,7 @@ public class ${ClassName}Controller {
     /**
      * 根据条件查询数据列表 带分页
      */
-    @RequestMapping(value = "/queryList", method = { RequestMethod.POST, RequestMethod.GET }, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="/listByQuery", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String list(@RequestParam(value = "content") String content, int rows, int page) {
         ${ClassName}SearchAO searchAO = WebConversionUtils.getConditionJavaObject(content, ${ClassName}SearchAO.class);
         return ${EntityName}Service.listByQuery(searchAO, rows, page);
@@ -46,33 +46,33 @@ public class ${ClassName}Controller {
         return ${EntityName}Service.getByPrimaryKey(primaryKey);
     }
 
-<#--    /**-->
-<#--     * 新增数据-->
-<#--     */-->
-<#--    @RequestMapping(value = "/saveSelective", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)-->
-<#--    public String saveSelective(@RequestParam("content") String content) {-->
-<#--        ${ClassName}DO saveAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);-->
-<#--        return ${EntityName}Service.saveSelective(saveAO);-->
-<#--    }-->
+    /**
+     * 新增数据
+     */
+    @RequestMapping(value = "/saveSelective", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String saveSelective(@RequestParam("content") String content) {
+        ${ClassName}DO saveAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);
+        return ${EntityName}Service.saveSelective(saveAO);
+    }
 
-<#--    /**-->
-<#--     * 更新数据-->
-<#--     */-->
-<#--    @RequestMapping(value = "/updateByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)-->
-<#--    public String update(@RequestParam("content") String content) {-->
-<#--        ${ClassName}DO updateAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);-->
-<#--        updateAO.setId(WebConversionUtils.getConditionJson(content).getString("id"));-->
-<#--        return ${EntityName}Service.update(updateAO);-->
-<#--    }-->
+    /**
+     * 更新数据
+     */
+    @RequestMapping(value = "/updateByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String update(@RequestParam("content") String content) {
+        ${ClassName}DO updateAO = WebConversionUtils.getValueJavaObject(content, ${ClassName}DO.class);
+        updateAO.setId(WebConversionUtils.getConditionJson(content).getString("id"));
+        return ${EntityName}Service.update(updateAO);
+    }
 
-<#--    /**-->
-<#--     * 删除数据-->
-<#--     */-->
-<#--    @RequestMapping(value = "/deleteByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)-->
-<#--    public String delete(@RequestParam("content") String content) {-->
-<#--        String ids = WebConversionUtils.getConditionJson(content).getString("ids");-->
-<#--        return ${EntityName}Service.delete(ids);-->
-<#--    }-->
+    /**
+     * 删除数据
+     */
+    @RequestMapping(value = "/deleteByPrimaryKey", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String delete(@RequestParam("content") String content) {
+        String ids = WebConversionUtils.getConditionJson(content).getString("ids");
+        return ${EntityName}Service.delete(ids);
+    }
 
 <#--/**
  * 批量新增数据

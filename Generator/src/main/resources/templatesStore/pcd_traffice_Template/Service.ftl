@@ -13,7 +13,7 @@ import com.pcd.common.utils.WebJsonUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.demo.TqToolKit;
+import com.pcd.trafficpolice.web.test.util.TqToolKit;
 import com.pcd.common.utils.IdBuilder;
 
 import java.util.ArrayList;
@@ -58,33 +58,33 @@ public class ${ClassName}Service${Impl}{
         return WebJsonUtils.successReturnSingle(result);
     }
 
-<#--    @Transactional(rollbackFor = Exception.class)-->
-<#--    @Override-->
-<#--    public String saveSelective(${ClassName}DO saveDO){-->
-<#--        // 非自动生成主键-->
-<#--        saveDO.setId(IdBuilder.newId());-->
-<#--        ${EntityName}Dao.insertSelective(saveDO);-->
-<#--        return WebJsonUtils.successReturn();-->
-<#--    }-->
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String saveSelective(${ClassName}DO saveDO){
+        // 非自动生成主键
+        saveDO.setId(IdBuilder.newId());
+        ${EntityName}Dao.insertSelective(saveDO);
+        return WebJsonUtils.successReturn();
+    }
 
-<#--    @Transactional(rollbackFor = Exception.class)-->
-<#--    @Override-->
-<#--    public String update(${ClassName}DO updateDO){-->
-<#--        ${EntityName}Dao.updateByPrimaryKeySelective(updateDO);-->
-<#--        return WebJsonUtils.successReturn();-->
-<#--    }-->
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String update(${ClassName}DO updateDO){
+        ${EntityName}Dao.updateByPrimaryKeySelective(updateDO);
+        return WebJsonUtils.successReturn();
+    }
 
-<#--    @Transactional(rollbackFor = Exception.class)-->
-<#--    @Override-->
-<#--    public String delete(String ids){-->
-<#--        List<String> primaryKeys = Arrays.asList(ids.split(","));-->
-<#--        for (String id : primaryKeys) {-->
-<#--            if (!TqToolKit.isBlank(id)) {-->
-<#--                ${EntityName}Dao.delete(id);-->
-<#--            }-->
-<#--        }-->
-<#--        return WebJsonUtils.successReturn();-->
-<#--    }-->
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String delete(String ids){
+        List<String> primaryKeys = Arrays.asList(ids.split(","));
+        for (String id : primaryKeys) {
+            if (!TqToolKit.isBlank(id)) {
+                ${EntityName}Dao.delete(id);
+            }
+        }
+        return WebJsonUtils.successReturn();
+    }
     <#--
     ${Override}
     public int insertBatch(List<${ClassName}> ${EntityName}s){

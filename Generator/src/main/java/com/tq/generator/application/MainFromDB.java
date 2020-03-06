@@ -18,11 +18,10 @@ public class MainFromDB {
 //        System.out.println(GeneratorUtil.generateHtmlFormPage("ww"));
     }
 
-
     public static void single() {
         Invoker invoker = new SingleInvoker.Builder()
-                .setTableName("TP_BUTTON")
-                .setClassName("ButtonTest")
+                .setTableName("GSD_RKXT_SYFWDJ")
+                .setClassName("Syfwdj")
                 .build();
         invoker.execute();
     }

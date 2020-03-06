@@ -1,8 +1,8 @@
 #数据库链接信息
 db:
   url: jdbc:oracle:thin:@//192.168.24.45:1521/kaifadb
-  username: traffic_police_core_platform
-  password: traffic_police_core_platform
+  username: GAODC
+  password: GAODC
 author: tq
 packageName: com.pcd.trafficpolice.web
 #生成文件路径
@@ -17,7 +17,7 @@ path:
   mapper: mybatis.mappers.primary
   html: static.PAGES.TP_Pages
 #生成文件自定义路径 若不指定 按照当前项目的默认地址创建
-customizePath: E:\tq_new\trafficpolice-hxpt-web\src\main\java
-customizeResourcesPath: E:\tq_new\trafficpolice-hxpt-web\src\main\
+customizePath: #E:\tq_new\trafficpolice-hxpt-web\src\main\java
+customizeResourcesPath: #E:\tq_new\trafficpolice-hxpt-web\src\main\
 #是否是逻辑删除  未实现
-isLogicDelete: false
+#isLogicDelete: false

@@ -34,58 +34,58 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO">
-        INSERT INTO ${TableName}
-        (<#list InsertProperties as propertie>${propertie.ColumnName}<#if propertie_has_next>, </#if></#list>)
-        values
-        (<#list InsertProperties as propertie>#${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>, </#if></#list>)
-    </insert>
+<#--    <insert id="insert" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO">-->
+<#--        INSERT INTO ${TableName}-->
+<#--        (<#list InsertProperties as propertie>${propertie.ColumnName}<#if propertie_has_next>, </#if></#list>)-->
+<#--        values-->
+<#--        (<#list InsertProperties as propertie>#${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>, </#if></#list>)-->
+<#--    </insert>-->
 
-    <insert id="insertSelective" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO" >
-        INSERT INTO ${TableName}
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-        <#list InsertProperties as propertie>
-            <if test="${propertie.PropertyName} != null" >
-                ${propertie.ColumnName}<#if propertie_has_next>,</#if>
-            </if>
-        </#list>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-        <#list InsertProperties as propertie>
-            <if test="${propertie.PropertyName} != null" >
-                #${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>,</#if>
-            </if>
-        </#list>
-        </trim>
-    </insert>
+<#--    <insert id="insertSelective" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO" >-->
+<#--        INSERT INTO ${TableName}-->
+<#--        <trim prefix="(" suffix=")" suffixOverrides="," >-->
+<#--        <#list InsertProperties as propertie>-->
+<#--            <if test="${propertie.PropertyName} != null" >-->
+<#--                ${propertie.ColumnName}<#if propertie_has_next>,</#if>-->
+<#--            </if>-->
+<#--        </#list>-->
+<#--        </trim>-->
+<#--        <trim prefix="values (" suffix=")" suffixOverrides="," >-->
+<#--        <#list InsertProperties as propertie>-->
+<#--            <if test="${propertie.PropertyName} != null" >-->
+<#--                #${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>,</#if>-->
+<#--            </if>-->
+<#--        </#list>-->
+<#--        </trim>-->
+<#--    </insert>-->
 
-    <update id="updateByPrimaryKeySelective" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO" >
-        UPDATE ${TableName}
-        <set>
-        <#list UpdateProperties as propertie>
-            <if test="${propertie.PropertyName} != null" >
-                ${propertie.ColumnName} = #${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>,</#if>
-            </if>
-        </#list>
-        </set>
-        where ${TableName}.${PrimaryKey} = ${WherePrimaryKey}
-    </update>
+<#--    <update id="updateByPrimaryKeySelective" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO" >-->
+<#--        UPDATE ${TableName}-->
+<#--        <set>-->
+<#--        <#list UpdateProperties as propertie>-->
+<#--            <if test="${propertie.PropertyName} != null" >-->
+<#--                ${propertie.ColumnName} = #${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>,</#if>-->
+<#--            </if>-->
+<#--        </#list>-->
+<#--        </set>-->
+<#--        where ${TableName}.${PrimaryKey} = ${WherePrimaryKey}-->
+<#--    </update>-->
 
-    <update id="updateByPrimaryKey" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO" >
-        UPDATE ${TableName}
-        SET
-        <#list UpdateProperties as propertie>
-            <if test="${propertie.PropertyName} != null" >
-                ${propertie.ColumnName} = #${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>,</#if>
-            </if>
-        </#list>
-        WHERE ${TableName}.${PrimaryKey} = ${WherePrimaryKey}
-    </update>
+<#--    <update id="updateByPrimaryKey" parameterType="${BasePackageName}${EntityPackageName}.${ClassName}DO" >-->
+<#--        UPDATE ${TableName}-->
+<#--        SET-->
+<#--        <#list UpdateProperties as propertie>-->
+<#--            <if test="${propertie.PropertyName} != null" >-->
+<#--                ${propertie.ColumnName} = #${BigBracket}${propertie.PropertyName},jdbcType=${propertie.TypeName}}<#if propertie_has_next>,</#if>-->
+<#--            </if>-->
+<#--        </#list>-->
+<#--        WHERE ${TableName}.${PrimaryKey} = ${WherePrimaryKey}-->
+<#--    </update>-->
 
-    <update id="delete">
-        DELETE FROM ${TableName}
-        WHERE ${TableName}.${PrimaryKey} = ${WherePrimaryKey}
-    </update>
+<#--    <update id="delete">-->
+<#--        DELETE FROM ${TableName}-->
+<#--        WHERE ${TableName}.${PrimaryKey} = ${WherePrimaryKey}-->
+<#--    </update>-->
 
     <#--    <insert id="insertBatch">-->
     <#--        INSERT INTO ${TableName}(-->

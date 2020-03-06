@@ -15,10 +15,10 @@ public interface ${ClassName}Dao {
 
     public ${ClassName}DO getByPrimaryKey(String primaryKey);
 
-<#--    public int insertSelective(${ClassName}DO saveDO);-->
+    public int insertSelective(${ClassName}DO saveDO);
 
-<#--    public int updateByPrimaryKeySelective(${ClassName}DO saveDO);-->
+    public int updateByPrimaryKeySelective(${ClassName}DO saveDO);
 
-<#--    public int delete(String primaryKey);-->
+    public int delete(String primaryKey);
 
 }
