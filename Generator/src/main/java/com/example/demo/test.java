@@ -2,11 +2,6 @@ package com.example.demo;
 
 import com.tq.generator.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.demo.TqToolKit.copyList;
-
 /**
  * @author Tian Qi
  * 2019/11/11

@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <!-- Oracle jdbc -->
-        <ojdbc.version>12.1.0.2</ojdbc.version>
+        <ojdbc.version>9.0.2.0.0</ojdbc.version>
 
         <pcd-common-component.version>1.2.1-RELEASE</pcd-common-component.version>
 
@@ -75,7 +75,7 @@
 
         <dependency>
             <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
+            <artifactId>ojdbc14</artifactId>
             <version>${ojdbc.version}</version>
         </dependency>
 
@@ -97,13 +97,6 @@
             <version>1.19</version>
         </dependency>
 
-        <!-- 公司公共组件 -->
-        <dependency>
-            <groupId>com.pcd</groupId>
-            <artifactId>common-component</artifactId>
-            <version>${pcd-common-component.version}</version>
-        </dependency>
-
         <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -118,6 +111,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.1.RELEASE</version>
             </plugin>
         </plugins>
     </build>
