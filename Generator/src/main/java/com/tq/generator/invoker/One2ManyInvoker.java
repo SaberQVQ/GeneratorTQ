@@ -22,7 +22,7 @@ public class One2ManyInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initOne2ManyTasks(tableName, className, parentTableName, parentClassName, foreignKey, tableInfos, parentTableInfos);
+        taskQueue.initOne2ManyTasks(tableName, className, parentTableName, parentClassName, foreignKey, tableInfos, parentTableInfos, businessType);
     }
 
     public static class Builder extends AbstractBuilder {

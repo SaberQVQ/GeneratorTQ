@@ -23,13 +23,23 @@ public class ControllerTask extends AbstractTask {
         super(className);
     }
 
+    public ControllerTask(String className, String businessType) {
+        super(className, businessType);
+    }
+
     @Override
     public void run() throws IOException, TemplateException {
+        //转换大小写
+        String upClassName = StringUtil.firstToUpperCase(className);
+        String lowClassName = StringUtil.firstToLowerCase(className);
+
         // 生成Controller填充数据
-        System.out.println("Generating " + className + "Controller.java");
+        System.out.println("Generating " + upClassName + "Controller.java");
         Map<String, String> controllerData = new HashMap<>();
         controllerData.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         controllerData.put("ControllerPackageName", ConfigUtil.getConfiguration().getPath().getController());
+        controllerData.put("businessType", businessType);
+
         if (StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getInterf())) {
             controllerData.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
         } else {
@@ -39,10 +49,15 @@ public class ControllerTask extends AbstractTask {
         controllerData.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
         controllerData.put("Author", ConfigUtil.getConfiguration().getAuthor());
         controllerData.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        controllerData.put("ClassName", className);
-        controllerData.put("EntityName", StringUtil.firstToLowerCase(className));
-        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getController());
-        String fileName = className + "Controller.java";
+        controllerData.put("ClassName", upClassName);
+        controllerData.put("EntityName", lowClassName);
+        String filePath = FileUtil.getSourcePath() +
+                StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) +
+                StringUtil.package2Path(businessType) +
+                StringUtil.package2Path(lowClassName) +
+                StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getController());
+
+        String fileName = upClassName + "Action.java";
         createFilePathIfNotExists(filePath);
         // 生成Controller文件
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_CONTROLLER, controllerData, filePath + fileName);

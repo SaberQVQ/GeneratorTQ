@@ -20,8 +20,9 @@ public class MainFromDB {
 
     public static void single() {
         Invoker invoker = new SingleInvoker.Builder()
-                .setTableName("GSD_RKXT_SYFWDJ")
-                .setClassName("Syfwdj")
+                .setTableName("DEMO_TEST_TQ_20201225")
+                .setClassName("test")
+                .setBusinessType("demo")
                 .build();
         invoker.execute();
     }

@@ -27,6 +27,9 @@ public abstract class AbstractInvoker implements Invoker {
     protected String parentForeignKey;
     protected List<ColumnInfo> tableInfos;
     protected List<ColumnInfo> parentTableInfos;
+
+    protected String businessType;
+
     protected ConnectionUtil connectionUtil = new ConnectionUtil();
     protected TaskQueue taskQueue = new TaskQueue();
     private ExecutorService executorPool = Executors.newFixedThreadPool(6);
@@ -120,5 +123,13 @@ public abstract class AbstractInvoker implements Invoker {
 
     public String getParentForeignKey() {
         return parentForeignKey;
+    }
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType;
     }
 }

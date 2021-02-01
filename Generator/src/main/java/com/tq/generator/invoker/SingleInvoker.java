@@ -21,7 +21,7 @@ public class SingleInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initSingleTasks(className, tableName, tableInfos);
+        taskQueue.initSingleTasks(className, tableName, tableInfos, businessType);
     }
 
     public static class Builder extends AbstractBuilder {
@@ -34,6 +34,11 @@ public class SingleInvoker extends AbstractInvoker {
 
         public Builder setClassName(String className) {
             invoker.setClassName(className);
+            return this;
+        }
+
+        public Builder setBusinessType(String businessType) {
+            invoker.setBusinessType(businessType);
             return this;
         }
 

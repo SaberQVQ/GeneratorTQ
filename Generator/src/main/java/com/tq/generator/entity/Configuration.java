@@ -11,6 +11,7 @@ public class Configuration implements Serializable {
     private String packageName;
     private String customizePath;
     private String customizeResourcesPath;
+    private String freemarkPath;
     private Path path;
     private Db db;
 
@@ -52,6 +53,14 @@ public class Configuration implements Serializable {
 
     public void setPath(Path path) {
         this.path = path;
+    }
+
+    public String getFreemarkPath() {
+        return freemarkPath;
+    }
+
+    public void setFreemarkPath(String freemarkPath) {
+        this.freemarkPath = freemarkPath;
     }
 
     public Db getDb() {

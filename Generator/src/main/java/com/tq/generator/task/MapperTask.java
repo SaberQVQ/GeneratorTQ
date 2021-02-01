@@ -23,6 +23,9 @@ public class MapperTask extends AbstractTask {
         this(tableName, className, null, null, null, infos, null);
     }
 
+    public MapperTask(String className, String tableName, List<ColumnInfo> infos, String businessType) {
+        this(tableName, className, null, null, null, infos, null, businessType);
+    }
     /**
      * 一对多Mapper
      */
@@ -30,11 +33,19 @@ public class MapperTask extends AbstractTask {
         this(tableName, className, parentTableName, parentClassName, foreignKey, null, null, tableInfos, parentTableInfos);
     }
 
+    public MapperTask(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos, String businessType) {
+        this(tableName, className, parentTableName, parentClassName, foreignKey, null, null, tableInfos, parentTableInfos, businessType );
+    }
+
     /**
      * 多对多Mapper
      */
     public MapperTask(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
-        super(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos);
+        this(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos, null);
+    }
+
+    public MapperTask(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos, String businessType) {
+        super(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos, businessType);
     }
 
     @Override
@@ -88,7 +99,10 @@ public class MapperTask extends AbstractTask {
 
             mapperData.put("Joins", "");
         }
-        String filePath = FileUtil.getResourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getMapper());
+        String filePath =
+//                FileUtil.getResourcePath() + //mapper 放在资源文件中
+                FileUtil.getSourcePath() +
+                StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getMapper());
 
         String fileName = className + "Mapper.xml";
         createFilePathIfNotExists(filePath);

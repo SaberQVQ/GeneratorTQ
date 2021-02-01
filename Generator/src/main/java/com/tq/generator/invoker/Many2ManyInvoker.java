@@ -22,7 +22,7 @@ public class Many2ManyInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initMany2ManyTasks(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos);
+        taskQueue.initMany2ManyTasks(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos, businessType);
     }
 
     public static class Builder extends AbstractBuilder {

@@ -15,18 +15,18 @@ public class TaskQueue {
 
     private LinkedList<AbstractTask> taskQueue = new LinkedList<>();
 
-    private void initCommonTasks(String className) {
+    private void initCommonTasks(String className, String businessType) {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
-            taskQueue.add(new ControllerTask(className));
+            taskQueue.add(new ControllerTask(className, businessType));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
-            taskQueue.add(new ServiceTask(className));
+            taskQueue.add(new ServiceTask(className, businessType));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getInterf())) {
-            taskQueue.add(new InterfaceTask(className));
+            taskQueue.add(new InterfaceTask(className, businessType));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getDao())) {
-            taskQueue.add(new DaoTask(className));
+            taskQueue.add(new DaoTask(className, businessType));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getDto())) {
             taskQueue.add(new DTOTask(className));
@@ -36,8 +36,8 @@ public class TaskQueue {
         }
     }
 
-    public void initSingleTasks(String className, String tableName, List<ColumnInfo> tableInfos) {
-        initCommonTasks(className);
+    public void initSingleTasks(String className, String tableName, List<ColumnInfo> tableInfos,String businessType) {
+        initCommonTasks(className, businessType);
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
             taskQueue.add(new EntityTask(className, tableInfos));
         }
@@ -49,8 +49,8 @@ public class TaskQueue {
         }
     }
 
-    public void initOne2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
-        initCommonTasks(className);
+    public void initOne2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos, String businessType) {
+        initCommonTasks(className, businessType);
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
             taskQueue.add(new EntityTask(className, parentClassName, foreignKey, tableInfos));
             taskQueue.add(new EntityTask(parentClassName, parentTableInfos));
@@ -60,8 +60,8 @@ public class TaskQueue {
         }
     }
 
-    public void initMany2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
-        initCommonTasks(className);
+    public void initMany2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos, String businessType) {
+        initCommonTasks(className, businessType);
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
             taskQueue.add(new EntityTask(className, parentClassName, foreignKey, parentForeignKey, tableInfos));
             taskQueue.add(new EntityTask(parentClassName, parentTableInfos));

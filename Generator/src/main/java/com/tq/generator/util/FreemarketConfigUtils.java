@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class FreemarketConfigUtils {
-    private static String path = new File(FreemarketConfigUtils.class.getClassLoader().getResource("ftls").getFile()).getPath();
+    private static String path = new File(FreemarketConfigUtils.class.getClassLoader().getResource("templatesStore").getFile() + ConfigUtil.getConfiguration().getFreemarkPath()).getPath();
     public final static int TYPE_ENTITY = 0;
     public final static int TYPE_DAO = 1;
     public final static int TYPE_SERVICE = 2;
@@ -22,7 +22,7 @@ public class FreemarketConfigUtils {
 
     public static synchronized Configuration getInstance() {
         if (null == configuration) {
-            configuration = new Configuration(Configuration.VERSION_2_3_23);
+            configuration = new Configuration();
             try {
                 if (path.contains("jar")){
                     configuration.setClassForTemplateLoading(FreemarketConfigUtils.class, "/ftls");

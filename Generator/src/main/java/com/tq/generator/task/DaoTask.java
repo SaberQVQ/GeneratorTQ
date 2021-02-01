@@ -23,10 +23,17 @@ public class DaoTask extends AbstractTask {
         super(className);
     }
 
+    public DaoTask(String className, String businessType) {
+        super(className, businessType);
+    }
+
     @Override
     public void run() throws IOException, TemplateException {
+        //转换大小写
+        String upClassName = StringUtil.firstToUpperCase(className);
+        String lowClassName = StringUtil.firstToLowerCase(className);
         // 生成Dao填充数据
-        System.out.println("Generating " + className + "Dao.java");
+        System.out.println("Generating " + upClassName + "Dao.java");
         Map<String, String> daoData = new HashMap<>();
         daoData.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         daoData.put("DaoPackageName", ConfigUtil.getConfiguration().getPath().getDao());
@@ -34,11 +41,17 @@ public class DaoTask extends AbstractTask {
         daoData.put("AOPackageName", ConfigUtil.getConfiguration().getPath().getAo());
         daoData.put("Author", ConfigUtil.getConfiguration().getAuthor());
         daoData.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        daoData.put("ClassName", className);
-        daoData.put("EntityName", StringUtil.firstToLowerCase(className));
+        daoData.put("ClassName", upClassName);
+        daoData.put("EntityName", lowClassName);
         daoData.put("Bracket", "<");
-        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getDao());
-        String fileName = className + "Dao.java";
+        daoData.put("businessType", businessType);
+
+        String filePath = FileUtil.getSourcePath() +
+                StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) +
+                StringUtil.package2Path(businessType) +
+                StringUtil.package2Path(lowClassName) +
+                StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getDao());
+        String fileName = upClassName + "Dao.java";
         createFilePathIfNotExists(filePath);
         // 生成dao文件
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_DAO, daoData, filePath + fileName);

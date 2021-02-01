@@ -28,13 +28,24 @@ public abstract class AbstractTask implements Serializable {
     protected List<ColumnInfo> tableInfos;
     protected List<ColumnInfo> parentTableInfos;
 
+    protected String businessType;
+
     /**
      * Controller、Service、Dao
      *
      * @param className
      */
     public AbstractTask(String className) {
-        this.className = className;
+        this(null, className, null, null, null, null, null, null, null, null);
+    }
+
+    /**
+     * Controller、Service、Dao
+     *
+     * @param className
+     */
+    public AbstractTask(String className, String businessType) {
+        this(null, className, null, null, null, null, null, null, null, businessType);
     }
 
     /**
@@ -46,11 +57,11 @@ public abstract class AbstractTask implements Serializable {
      * @param tableInfos
      */
     public AbstractTask(String className, String parentClassName, String foreignKey, String parentForeignKey, List<ColumnInfo> tableInfos) {
-        this.className = className;
-        this.parentClassName = parentClassName;
-        this.foreignKey = foreignKey;
-        this.parentForeignKey = parentForeignKey;
-        this.tableInfos = tableInfos;
+        this(null, className, null, parentClassName, foreignKey, parentForeignKey, null, tableInfos, null, null);
+    }
+
+    public AbstractTask(String className, String parentClassName, String foreignKey, String parentForeignKey, List<ColumnInfo> tableInfos, String businessType) {
+        this(null, className, null, parentClassName, foreignKey, parentForeignKey, null, tableInfos, null, businessType);
     }
 
 
@@ -67,6 +78,10 @@ public abstract class AbstractTask implements Serializable {
      * @param parentTableInfos
      */
     public AbstractTask(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
+        this(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos, null);
+    }
+
+    public AbstractTask(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos, String businessType) {
         this.tableName = tableName;
         this.className = className;
         this.parentTableName = parentTableName;
@@ -76,6 +91,8 @@ public abstract class AbstractTask implements Serializable {
         this.relationalTableName = relationalTableName;
         this.tableInfos = tableInfos;
         this.parentTableInfos = parentTableInfos;
+
+        this.businessType = businessType;
     }
 
     public abstract void run() throws IOException, TemplateException;
